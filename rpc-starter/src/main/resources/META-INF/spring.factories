@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=priv.eric.starter.autoconfig.RpcAutoConfiguration

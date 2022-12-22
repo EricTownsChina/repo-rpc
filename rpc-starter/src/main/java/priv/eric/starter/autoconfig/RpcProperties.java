@@ -11,11 +11,9 @@ public class RpcProperties {
 
     private String registerType;
 
-    private String name;
+    private String serviceName;
 
-    private String address;
-
-    private Integer port = 2181;
+    private String registerAddress;
 
     private String protocol = "java";
 }

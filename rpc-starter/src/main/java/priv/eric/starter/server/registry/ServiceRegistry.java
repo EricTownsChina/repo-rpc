@@ -12,4 +12,6 @@ public interface ServiceRegistry {
      */
     void register(ServiceInstanceInfo serviceInstanceInfo) throws Exception;
 
+    ServiceInstanceInfo getRegistryInfo(String serviceName) throws Exception;
+
 }
