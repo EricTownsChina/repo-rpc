@@ -2,6 +2,8 @@ package priv.eric.starter.entity;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class ServiceInstanceInfo {
     /**
@@ -42,7 +44,7 @@ public class ServiceInstanceInfo {
     }
 
     public static Builder n() {
-        return new Builder();
+        return new Builder().setInstanceId(UUID.randomUUID().toString());
     }
 
     public static final class Builder {

@@ -13,6 +13,8 @@ public class RpcProperties {
 
     private String serviceName;
 
+    private Integer exposePort;
+
     private String registerAddress;
 
     private String protocol = "java";

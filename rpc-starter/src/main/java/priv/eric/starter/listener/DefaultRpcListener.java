@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
+import priv.eric.starter.autoconfig.RpcProperties;
 import priv.eric.starter.client.ClientProxyFactory;
 import priv.eric.starter.entity.ServiceInstanceInfo;
 import priv.eric.starter.entity.annotation.ServiceExpose;
@@ -29,13 +30,16 @@ public class DefaultRpcListener implements ApplicationListener<ContextRefreshedE
 
     private ClientProxyFactory clientProxyFactory;
 
+    private RpcProperties rpcProperties;
+
     public DefaultRpcListener() {
     }
 
-    public DefaultRpcListener(ServiceRegistry serviceRegistry, RpcServer rpcServer, ClientProxyFactory clientProxyFactory) {
+    public DefaultRpcListener(ServiceRegistry serviceRegistry, RpcServer rpcServer, ClientProxyFactory clientProxyFactory, RpcProperties rpcProperties) {
         this.serviceRegistry = serviceRegistry;
         this.rpcServer = rpcServer;
         this.clientProxyFactory = clientProxyFactory;
+        this.rpcProperties = rpcProperties;
     }
 
     @Override
@@ -81,24 +85,12 @@ public class DefaultRpcListener implements ApplicationListener<ContextRefreshedE
 
     private void refreshRpcServer(ApplicationContext applicationContext) throws Exception {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(ServiceExpose.class);
-
-        Environment environment = applicationContext.getEnvironment();
-        String serviceName = environment.getProperty("spring.application.name");
-        Integer port = Integer.parseInt(Objects.requireNonNull(environment.getProperty("server.port")));
-        String ip = InetAddress.getLocalHost().getHostAddress();
-
-        ServiceInstanceInfo instanceInfo = ServiceInstanceInfo.n()
-                .setServiceName(serviceName)
-                .setIp(ip)
-                .setPort(port)
-                .build();
-
         for (Object o : beans.values()) {
-            registerServiceInstanceInfo(o, instanceInfo);
+            registerServiceInstanceInfo(o);
         }
     }
 
-    private void registerServiceInstanceInfo(Object bean, ServiceInstanceInfo instanceInfo) throws Exception {
+    private void registerServiceInstanceInfo(Object bean) throws Exception {
         Class<?>[] interfaces = bean.getClass().getInterfaces();
         if (interfaces.length == 0) {
             // 为实现接口, 无法通过JDK代理增强
@@ -107,10 +99,15 @@ public class DefaultRpcListener implements ApplicationListener<ContextRefreshedE
 
         Class<?> interfaceClazz = interfaces[0];
         String interfaceName = interfaceClazz.getName();
-        instanceInfo.setClazz(interfaceClazz);
-        instanceInfo.setInstanceId(interfaceName);
-        instanceInfo.setBean(bean);
-
+        Integer port = rpcProperties.getExposePort();
+        String ip = InetAddress.getLocalHost().getHostAddress();
+        ServiceInstanceInfo instanceInfo = ServiceInstanceInfo.n()
+                .setServiceName(interfaceName)
+                .setIp(ip)
+                .setPort(port)
+                .setBean(bean)
+                .setClazz(interfaceClazz)
+                .build();
         serviceRegistry.register(instanceInfo);
     }
 
