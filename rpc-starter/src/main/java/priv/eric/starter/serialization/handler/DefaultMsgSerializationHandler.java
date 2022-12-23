@@ -12,13 +12,13 @@ import java.io.ObjectOutputStream;
 public class DefaultMsgSerializationHandler implements MsgSerialization {
 
     @Override
-    public RpcRequest serializeRpcRequest(byte[] data) throws Exception {
+    public RpcRequest deserializeRpcRequest(byte[] data) throws Exception {
         ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(data));
         return (RpcRequest) objectInputStream.readObject();
     }
 
     @Override
-    public byte[] deserializeRpcRequest(RpcRequest rpcRequest) throws Exception {
+    public byte[] serializeRpcRequest(RpcRequest rpcRequest) throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(rpcRequest);
@@ -26,13 +26,13 @@ public class DefaultMsgSerializationHandler implements MsgSerialization {
     }
 
     @Override
-    public RpcResponse serializeRpcResponse(byte[] data) throws Exception {
+    public RpcResponse deserializeRpcResponse(byte[] data) throws Exception {
         ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(data));
         return (RpcResponse) objectInputStream.readObject();
     }
 
     @Override
-    public byte[] deserializeRpcResponse(RpcResponse rpcResponse) throws Exception {
+    public byte[] serializeRpcResponse(RpcResponse rpcResponse) throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(rpcResponse);

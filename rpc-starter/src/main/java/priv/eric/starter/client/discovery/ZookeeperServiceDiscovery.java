@@ -1,10 +1,9 @@
-package priv.eric.starter.client.discovery.impl;
+package priv.eric.starter.client.discovery;
 
 import com.alibaba.fastjson2.JSON;
 import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import priv.eric.starter.client.discovery.ServiceDiscovery;
 import priv.eric.starter.entity.ServiceInstanceInfo;
 
 import java.io.UnsupportedEncodingException;

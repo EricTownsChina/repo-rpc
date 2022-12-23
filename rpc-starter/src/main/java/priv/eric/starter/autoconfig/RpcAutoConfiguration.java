@@ -3,10 +3,10 @@ package priv.eric.starter.autoconfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import priv.eric.starter.client.discovery.ServiceDiscovery;
-import priv.eric.starter.client.discovery.impl.ZookeeperServiceDiscovery;
+import priv.eric.starter.client.discovery.ZookeeperServiceDiscovery;
 import priv.eric.starter.server.registry.ServiceRegistry;
-import priv.eric.starter.server.registry.impl.DefaultServiceRegistry;
-import priv.eric.starter.server.registry.impl.ZookeeperServiceRegistry;
+import priv.eric.starter.server.registry.DefaultServiceRegistry;
+import priv.eric.starter.server.registry.ZookeeperServiceRegistry;
 
 @Configuration
 public class RpcAutoConfiguration {

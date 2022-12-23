@@ -1,4 +1,4 @@
-package priv.eric.starter.server.registry.impl;
+package priv.eric.starter.server.registry;
 
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,6 @@ import org.I0Itec.zkclient.serialize.ZkSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import priv.eric.starter.entity.ServiceInstanceInfo;
-import priv.eric.starter.server.registry.ServiceRegistry;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

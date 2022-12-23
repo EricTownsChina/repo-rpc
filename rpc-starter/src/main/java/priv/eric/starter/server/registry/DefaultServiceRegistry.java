@@ -1,4 +1,4 @@
-package priv.eric.starter.server.registry.impl;
+package priv.eric.starter.server.registry;
 
 import lombok.extern.slf4j.Slf4j;
 import priv.eric.starter.entity.ServiceInstanceInfo;

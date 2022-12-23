@@ -19,7 +19,7 @@ public class ServiceInstanceInfo {
     /**
      * 端口
      */
-    private String port;
+    private Integer port;
     /**
      * class对象
      */
@@ -49,7 +49,7 @@ public class ServiceInstanceInfo {
         private String serviceName;
         private String instanceId;
         private String ip;
-        private String port;
+        private Integer port;
         private Class<?> clazz;
         private Object bean;
 
@@ -68,7 +68,7 @@ public class ServiceInstanceInfo {
             return this;
         }
 
-        public Builder setPort(String port) {
+        public Builder setPort(Integer port) {
             this.port = port;
             return this;
         }
