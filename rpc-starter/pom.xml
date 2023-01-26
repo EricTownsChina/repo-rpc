@@ -6,7 +6,7 @@
         <groupId>priv.eric</groupId>
         <artifactId>repo-rpc</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>rpc-starter</artifactId>

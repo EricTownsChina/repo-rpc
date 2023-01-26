@@ -1,7 +1,5 @@
 package priv.eric.starter.client;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import priv.eric.starter.client.discovery.ServiceDiscovery;
 import priv.eric.starter.client.network.RpcClient;
 import priv.eric.starter.entity.ServiceInstanceInfo;
@@ -12,7 +10,6 @@ import priv.eric.starter.serialization.RpcResponse;
 import java.lang.reflect.Proxy;
 
 public class ClientProxyFactory {
-    private static final Logger logger = LoggerFactory.getLogger(ClientProxyFactory.class);
 
     private final ServiceDiscovery serviceDiscovery;
 
@@ -39,7 +36,7 @@ public class ClientProxyFactory {
             String serviceName = clazz.getName();
             ServiceInstanceInfo instanceInfo = serviceDiscovery.selectOneInstance(serviceName);
             if (instanceInfo == null) {
-                throw new RuntimeException("未获取到" + serviceName + "的远程服务信息!");
+                throw new NullPointerException("未获取到" + serviceName + "的远程服务信息!");
             }
 
             RpcRequest rpcRequest = new RpcRequest();

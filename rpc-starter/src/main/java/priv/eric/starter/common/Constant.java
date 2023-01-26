@@ -7,5 +7,7 @@ public class Constant {
 
     public static final String ERIC_SERVICE_ROOT = "/priv/eric/";
 
+    public static final String ZOOKEEPER = "zookeeper";
+
 
 }

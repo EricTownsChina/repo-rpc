@@ -4,9 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import priv.eric.starter.client.discovery.ServiceDiscovery;
 import priv.eric.starter.client.discovery.ZookeeperServiceDiscovery;
-import priv.eric.starter.server.registry.ServiceRegistry;
 import priv.eric.starter.server.registry.DefaultServiceRegistry;
+import priv.eric.starter.server.registry.ServiceRegistry;
 import priv.eric.starter.server.registry.ZookeeperServiceRegistry;
+
+import static priv.eric.starter.common.Constant.ZOOKEEPER;
 
 @Configuration
 public class RpcAutoConfiguration {
@@ -23,7 +25,7 @@ public class RpcAutoConfiguration {
     @Bean
     public ServiceRegistry serviceRegistry() {
         String registerType = rpcProperties.getRegisterType();
-        if ("zookeeper".equals(registerType)) {
+        if (ZOOKEEPER.equals(registerType)) {
             return new ZookeeperServiceRegistry(rpcProperties.getRegisterAddress());
         }
         return new DefaultServiceRegistry();
@@ -31,7 +33,6 @@ public class RpcAutoConfiguration {
 
     @Bean
     public ServiceDiscovery serviceDiscovery() {
-//        String registerType = rpcProperties.getRegisterType();
         return new ZookeeperServiceDiscovery(rpcProperties.getRegisterAddress());
     }
 
